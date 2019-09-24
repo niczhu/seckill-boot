@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.seckill.seckillboot.dal.mapper.SeckillDao">
+    <!--开启mybatis的缓存策略的第二步-->
+<!--<cache readOnly="true" size="500" flushInterval="120000" eviction="LRU"/>-->
+<!--    <cache type="org.seckill.cache.RedisCache"/>-->
+
+    <update id="reduceNumber" >
+        update
+        seckill
+        set
+        number = number-1
+        where seckill_id = #{seckillId}
+        and start_time <![CDATA[ <= ]]> #{killTime}
+        and end_time >=  #{killTime}
+        and number > 0;
+    </update>
+
+    <!--使用mybatis缓存的第三步，usecache=true 默认为true-->
+    <select id="queryById" resultType="SeckillBean" parameterType="long">
+        <![CDATA[
+        select
+            seckill_id,
+            `name`,
+            `number`,
+            start_time,
+            end_time,
+            create_time
+        FROM
+            seckill
+        where
+            seckill_id = #{seckillId}
+        limit 1
+        ]]>
+    </select>
+
+    <select id="search" resultType="SeckillBean">
+        <![CDATA[
+            select
+                seckill_id,
+                `name`,
+                `number`,
+                start_time,
+                end_time,
+                create_time
+            FROM
+                seckill
+            ORDER BY create_time DESC
+        ]]>
+    </select>
+
+    <update id="updateById" parameterType="SeckillBean">
+        <![CDATA[
+            update seckill set
+                seckill_id = #{seckillId},
+                name = #{name},
+                number = #{ number },
+                start_time = #{ startTime },
+                end_time = #{endTime},
+                create_time = #{createTime}
+            where
+                seckill_id = #{ seckillId }
+        ]]>
+    </update>
+
+
+</mapper>
