@@ -4,6 +4,8 @@ import com.seckill.seckillboot.dal.bean.SeckillBean;
 import com.seckill.seckillboot.dal.mapper.SeckillDao;
 import com.seckill.seckillboot.service.SeckillService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -25,5 +27,7 @@ public class SeckillServiceImpl implements SeckillService {
 
         return seckillDao.search(new HashMap<>());
     }
+
+
 
 }

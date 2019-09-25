@@ -2,12 +2,12 @@ package com.seckill.seckillboot.dal.mapper;
 
 
 import com.seckill.seckillboot.dal.bean.SeckillBean;
-import org.mybatis.spring.annotation.MapperScan;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 import java.util.Map;
 
-@MapperScan
+@Mapper
 public interface SeckillDao {
 
     List<SeckillBean> search(Map<String,Object> params);
