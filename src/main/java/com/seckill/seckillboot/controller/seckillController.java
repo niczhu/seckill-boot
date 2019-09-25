@@ -17,8 +17,6 @@ import java.util.concurrent.TimeUnit;
 @RestController
 public class seckillController {
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
 
     @Autowired
     private SeckillService seckillService;
@@ -28,12 +26,15 @@ public class seckillController {
 
     @GetMapping("test")
     public Object test(){
-        return seckillService.search(new HashMap<>());
+        HashMap<String, Object> p = new HashMap<>();
+        p.put("seckillId",1003);
+        return seckillService.search(p);
     }
+
+
     @GetMapping("redis/{key}")
     public Object redis(@PathVariable String key){
         stringRedisTemplate.opsForValue().set(key,"test925",30, TimeUnit.MILLISECONDS);
-
         return stringRedisTemplate.opsForValue().get(key);
     }
 }

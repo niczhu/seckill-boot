@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +26,7 @@ public class SeckillServiceImpl implements SeckillService {
     @Override
     public List<SeckillBean> search(Map<String, Object> params) {
 
-        return seckillDao.search(new HashMap<>());
+        return seckillDao.search(params);
     }
 
 

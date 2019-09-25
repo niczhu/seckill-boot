@@ -48,6 +48,7 @@
                 create_time
             FROM
                 seckill
+            where seckill_id =#{seckillId}
             ORDER BY create_time DESC
         ]]>
     </select>
