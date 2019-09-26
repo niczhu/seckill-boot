@@ -9,4 +9,8 @@ public interface SeckillService {
 
     public List<SeckillBean> search(Map<String,Object> params);
 
+    public Object ehcache(String cacheId);
+
+    public Object cleanCache(String cacheId);
+
 }
